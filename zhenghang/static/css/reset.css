@@ -1,0 +1,49 @@
+/*
+* @Author: name
+* @Date:   2017-12-01 09:16:39
+* @Last Modified by:   name
+* @Last Modified time: 2017-12-01 09:38:05
+*/
+/**
+ * 公共样式表
+ */
+
+/**
+ * 清除浏览器的内外边距
+ */
+html,body{
+    padding: 0;
+    margin:0;
+    /**
+     *设置整个页面的默认字体和文字大小或者文字颜色
+     */
+    font-size: 12px;
+    color: #333;
+    font-family: "微软雅黑";
+}
+/**
+ *清除ul，li，ol，dl，dt，dd，p，h1-h6等标签的内外边距
+ */
+h1,h2,h3,h4,h5,h6,p,ul,ol,li,dl,dt,dd{
+    padding:0;
+    margin:0
+}
+/**
+ * 清除列表的列表样式，就是小黑点和序号
+ */
+ul,ol{
+    list-style:none;
+}
+/**
+ * 清除a标签的下划线
+ */
+a{
+    text-decoration: none;
+    /**
+     * 也可以给全局的a标签添加默认样式
+     */
+    color:#333;
+}
+/**
+ * 可以另外添加的该项目公用的样式（非必须）
+ */

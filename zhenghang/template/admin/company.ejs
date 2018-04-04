@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+    <style type="text/css">
+        h2{
+            text-align:center;
+            width: 1100px;
+            margin:50px auto;
+            height: 50px;
+            line-height:50px;
+            border-bottom:1px solid #ccc;
+        }
+        .box{
+            width: 1100px;
+            height:auto;
+            margin:0 auto;
+            display:flex;
+            justify-content:center;
+        }
+        .rbox{
+            width: 900px;
+            height: 420px;
+        }
+        .lbox{
+            width: 200px;
+            display:flex;
+            justify-content:center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .lbox a{
+            display:block;
+            text-decoration:none;
+            width: 200px;
+            height: 60px;
+            line-height:60px;
+            text-align:center;
+            font-size:30px;
+            color:#888;
+        }
+        .lbox a:hover{
+            background:#97C8FD;
+        }
+        .lbox a.first{
+            background:#97C8FD;
+        }
+    </style>
+</head>
+<body>
+    <h2>后台管理界面</h2>
+    <div class="box">
+        <div class="lbox">
+            <a href="/frticle">banner管理</a>
+            <a href="/grticle" class="first">company管理</a>
+            <a href="/hrticle">简介管理</a>
+            <a href="/irticle">用户信息管理</a>
+            <a href="/jrticle">管理员管理</a>
+            <a href="/krticle">news管理</a>
+        </div>
+        <div class="rbox">
+            <div class="new">
+                <img src="images/1.jpg " />
+                <ul>
+                    <% for(var i=0;i<company.length;i++){ %>
+                        <li><%= company[i].title %> <span><%= company[i].time %></span></li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><img src="images/logo.jpg" /></div>
+        <div class="menu">
+            <ul>
+                <% include public/top.ejs %>
+            </ul>
+        </div>
+    </div>
+    <div class="banner"><img src="images/sec_banner.jpg" /></div>
+    <div class="news_con">
+        <div class="new_menu">
+            <ul>
+                <li class="first"><a href="/article">企业新闻</a></li>
+                <li><a href="/brticle">行业动态</a></li>
+                <li><a href="/crticle">企业理念</a></li>
+                <li><a href="/drticle">网站留言</a></li>
+            </ul>
+        </div>
+        <div class="new">
+            <img src="images/company_news.jpg " />
+            <ul>
+                <% for(var i=0;i<news.length;i++){ %>
+                    <li><%= news[i].title%> <span><%= news[i].time %></span></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <div class="footer">
+        2011-2013 &nbsp;&nbsp;@正航科技股份有限公司&nbsp;&nbsp;版权所有<br />地址 ： 上海乐清市柳市镇柳市大厦&nbsp;&nbsp;邮编： 2000000 电话： 021-12345678 传真：021-12345678 E-mail: admin@zhenghang.com
+    </div>
+</body>
+</html>

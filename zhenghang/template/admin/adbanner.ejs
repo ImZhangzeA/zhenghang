@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        h2{
+            text-align:center;
+            width: 1100px;
+            margin:50px auto;
+            height: 50px;
+            line-height:50px;
+            border-bottom:1px solid #ccc;
+        }
+        .box{
+            width: 1100px;
+            height:auto;
+            margin:0 auto;
+            display:flex;
+            justify-content:space-around;
+        }
+        .rbox{
+            width: 800px;
+            height: 420px;
+            position:relative;
+        }
+        .lbox{
+            width: 200px;
+            display:flex;
+            justify-content:center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .lbox a{
+            display:block;
+            text-decoration:none;
+            width: 200px;
+            height: 60px;
+            line-height:60px;
+            text-align:center;
+            font-size:30px;
+            color:#888;
+        }
+        .lbox a:hover{
+            background:#97C8FD;
+        }
+        .lbox a.first{
+            background:#97C8FD;
+        }
+        .imgs{
+            width: 100%;
+            display:flex;
+            justify-content:space-between;
+            flex-wrap:wrap;
+        }
+        .imgs img{
+            width: 100px;
+        }
+        span{
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .foot{
+            position:absolute;
+            bottom:0px;
+            left:50%;
+            margin-left:-144px;
+        }
+        .debtn{
+            margin-top:10px;
+        }
+        p.use{
+            width: 1100px;
+            margin: 0 auto;
+            text-align: start;
+            font-size: 22px;
+            color: #666;
+            margin-bottom: 20px;
+            margin-top: -30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>后台管理界面</h2>
+
+    <div class="box">
+        <div class="lbox">
+            <a href="/frticle" class="first">banner管理</a>
+            <a href="/grticle">company管理</a>
+            <a href="/hrticle">简介管理</a>
+            <a href="/irticle">用户信息管理</a>
+            <a href="/jrticle">管理员管理</a>
+            <a href="/krticle">news管理</a>
+        </div>
+        <div class="rbox">
+            <form>
+                <div class="imgs">
+                    <% for(var i=0;i<banne.length;i++){ %>
+                        <span><img src= <%= banne[i].src %> alt="" /><br /><input type="button" value="删除" class="debtn" /></span>
+                    <% } %>
+                </div>
+            </form>
+            <form class="foot" action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name='fileInp' id="file" />
+                    <input type="submit" value="添加" class="subtn" />
+            </form>
+        </div>
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+    $('.debtn').click(function(){
+        var deSrc = $(this).siblings('img').attr('src');
+        // console.log(deSrc);
+        $.ajax({
+            url: '/ban',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {act:'del',src:deSrc},
+            success:function(data){
+                if(data.ok == true){
+                    window.location.reload();
+                    alert('删除成功');
+                }
+            }
+        })
+    });
+    $('.subtn').click(function(){
+        $('.foot').ajaxForm(function(data){
+            if(data.ok == true){
+                window.location.reload();
+                alert('上传成功')
+            }else{
+                alert('上传失败')
+            }
+        })
+    })
+    </script>
+</body>
+</html>

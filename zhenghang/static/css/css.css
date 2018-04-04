@@ -1,0 +1,135 @@
+/*
+* @Author: name
+* @Date:   2017-12-01 11:01:52
+* @Last Modified by:   name
+* @Last Modified time: 2018-03-14 17:04:18
+*/
+.header{
+    width:1003px;
+    height: 78px;
+    margin:0 auto;
+    background:url('../images/head_bg.jpg') 0 0 repeat-x;
+}
+.logo{
+    float:left;
+}
+.menu{
+    float:right;
+}
+.menu li{
+    float:left;
+    background:url('../images/menu_bg.jpg');
+}
+.menu li a{
+    display:block;
+    width:90px;
+    height:78px;
+    line-height: 78px;
+    font-size: 13px;
+    color:#5ECAEF;
+    text-align: center;
+}
+.menu li a:hover{
+    color:#FB4242;
+}
+.banner{
+    width:1003px;
+    height:132px;
+    margin:0 auto;
+}
+.content{
+    width:1003px;
+    margin:0 auto;
+    border-bottom: 1px solid #888;
+}
+.con_menu{
+    width:678px;
+    float:left;
+}
+.con_img{
+    width:325px;
+    height:464px;
+    float:left;
+}
+.con_menu p{
+    font-size:15px;
+    line-height:36px;
+    text-indent: 30px;
+    color:#333;
+}
+.news_con{
+    width:1003px;
+    height:470px;
+    margin:0 auto;
+    border-top: 1px solid #B8B5B5;
+}
+.new_menu {
+    width:190px;
+    height:470px;
+    border-right: 1px solid #B8B5B5;
+    float:left;
+}
+.new_menu li{
+    width:220px;
+    height:44px;
+    padding-top:10px;
+}
+.new_menu a{
+    display:block;
+    width:170px;
+    height:28px;
+    color:#85CFF1;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 18px;
+    line-height:28px;
+}
+.first a{
+    background:#4844FA;
+    color:#fff;
+}
+.new_menu li a:hover{
+    background:#4844FA;
+    color:#fff;
+}
+.new{
+    width:812px;
+    height:411px;
+    float:left;
+}
+.new li{
+    width:620px;
+    height:36px;
+    line-height:36px;
+    font-size: 14px;
+    padding-left:62px;
+    float:left;
+}
+span{
+    float:right;
+}
+.tet{
+    margin:0px 60px;
+    font-size: 14px;
+    color:#333;
+    line-height:25px;
+    text-indent:28px;
+}
+.tet-t{
+    margin:0px 108px;
+    font-size: 15px;
+    font-weight:bold;
+    color:#333;
+    line-height:25px;
+    text-indent:28px;
+}
+.footer{
+    width:1003px;
+    height:68px;
+    text-align: center;
+    font-size: 12px;
+    margin:0 auto;
+    line-height:24px;
+    padding-top: 10px;
+    border-top:1px solid #C5BFBF;
+}

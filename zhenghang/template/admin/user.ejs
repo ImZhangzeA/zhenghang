@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+    <style type="text/css">
+        h2{
+            text-align:center;
+            width: 1100px;
+            margin:50px auto;
+            height: 50px;
+            line-height:50px;
+            border-bottom:1px solid #ccc;
+        }
+        .box{
+            width: 1100px;
+            height:auto;
+            margin:0 auto;
+            display:flex;
+            justify-content:center;
+        }
+        .rbox{
+            width: 900px;
+            height: 420px;
+        }
+        .lbox{
+            width: 200px;
+            display:flex;
+            justify-content:center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .lbox a{
+            display:block;
+            text-decoration:none;
+            width: 200px;
+            height: 60px;
+            line-height:60px;
+            text-align:center;
+            font-size:30px;
+            color:#888;
+        }
+        .lbox a:hover{
+            background:#97C8FD;
+        }
+        .lbox a.first{
+            background:#97C8FD;
+        }
+        .desw{
+            margin-right: 10px;
+            margin-bottom:15px;
+        }
+        .tit{
+            margin-right:30px;
+            text-decoration:none;
+            margin-bottom:15px;
+            font-size:15px;
+        }
+        .set{
+            margin-right: 10px;
+            margin-bottom:15px;
+        }
+        .rbox ul{
+            margin-top:20px;
+            margin-left:20px;
+        }
+        .tet-t{
+            display:none;
+        }
+        .add{
+            margin-top:20px;
+            margin-left:20px;
+            margin-top:20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>后台管理界面</h2>
+    <div class="box">
+        <div class="lbox">
+            <a href="/frticle">banner管理</a>
+            <a href="/grticle">company管理</a>
+            <a href="/hrticle">简介管理</a>
+            <a href="/irticle" class="first">用户信息管理</a>
+            <a href="/jrticle">管理员管理</a>
+            <a href="/krticle">news管理</a>
+        </div>
+        <div class="rbox">
+            <ul>
+                <% for(var i=0;i<userlist.length;i++){ %>
+                    <li><input type="button" value="删除" class="desw" /><u class="tit usname"><%= userlist[i].username %></u><u class="tit"><%= userlist[i].sex %></u><u class="tit"><%= userlist[i].likes %></u><u class="tit"><%= userlist[i].qq %></u><u class="tit"><%= userlist[i].city %></u><u class="tit"><%= userlist[i].eml %></u><span></span></li>
+                <% } %>
+            </ul>
+            <input type="button" value="添加" class="add" />
+            <div class="tet-t">
+                <from>
+                    <br />姓 &nbsp;名：&nbsp;<input type="text" class="username" /><br />
+                    <br />性别：&nbsp;<input type="radio" name="sex" value="男" />男 &nbsp;<input type="radio" name="sex" value="女"/>女<br />
+                    <br />兴趣：&nbsp;<input type="checkbox" value="游戏" />游戏 &nbsp;<input type="checkbox" value="运动" />运动 &nbsp;<input type="checkbox" value="美食" />美食 &nbsp;<input type="checkbox" value="睡觉" />睡觉 <br />
+                    <br />联系方式：&nbsp;<input type="text" class="tel" /><br />
+                    <br />QQ：&nbsp;<input type="text" class="qq" /><br />
+                    <br/>来自：&nbsp;<select class="city"><option>武汉</option> <option>广州</option> <option>深圳</option> <option>上海</option> <option>北京</option></select><br />
+                    <br />E-mail：&nbsp;<input type="text" class="eml" /><br />
+                    <br /><input type="submit" class="subtn" /> &nbsp;&nbsp;&nbsp;&nbsp;<input type ="reset" class="reset" />
+                </from>
+            </div>
+        </div>
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $('.desw').click(function(){
+            var usen = $(this).siblings('.usname').html();
+            console.log(usen)
+            $.ajax({
+                url: '/aduse',
+                type: 'POST',
+                dataType: 'json',
+                data: {usen:usen},
+                success:function(data){
+                    if(data.ok == true){
+                        window.location.reload();
+                        alert('删除成功');
+                    }else{
+                        alert('删除失败')
+                    }
+                }
+            })
+        });
+        $('.username').blur(function(){
+            let pattern = /^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/;
+            let str = $('.username').val();
+            // console.log(pattern.test(str));
+            if(pattern.test(str)){
+
+            }else{
+                $('.username').val('');
+                alert('请输入正确的姓名！')
+            }
+        });
+        $('.tel').blur(function(){
+            let pattern = /(13\d|14[579]|15[^4\D]|17[^49\D]|18\d)\d{8}/g;
+            let str = $('.tel').val();
+            if(pattern.test(str)){
+
+            }else{
+                $('.tel').val('');
+                alert('请输入正确的手机号！');
+            }
+        })
+        $('.qq').blur(function(){
+            let pattern = /[1-9]\d{4,}/g;
+            let str = $('.qq').val();
+            if(pattern.test(str)){
+
+            }else{
+                $('.qq').val();
+                alert('请输入正确的QQ号！');
+            }
+        });
+        $('.eml').blur(function(){
+            let pattern = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/g ;
+            let str =  $('.eml').val();
+            if(pattern.test(str)){
+
+            }else{
+                $('.eml').val('');
+                alert('请输入正确的邮箱！');
+            }
+        });
+        $('.reset').click(function(){
+            $('.username').val('');
+            $('.tel').val('');
+            $('.qq').val('');
+            $('.eml').val('');
+            $('input:checkbox').each(function () {
+                    $(this).attr('checked',false);
+            });
+            $('input:radio').each(function () {
+                    $(this).attr('checked',false);
+            });
+        })
+        $('.subtn').click(function(){
+            var check = '';
+            $('input:checkbox:checked').each(function(){
+                check += $(this).val()+'  ';
+            });
+            // console.log(check);
+            $.ajax({
+                url: '/user',
+                type: 'POST',
+                dataType: 'JSON',
+                data:{act:'reg',username:$('.username').val(),sex:$('input:radio:checked').val(),likes:check,tel:$('.tel').val(),qq:$('.qq').val(),city:$('.city').val(),eml:$('.eml').val()},
+                success:function(data){
+                    if(data.ok == true){
+                        alert('提交成功')
+                    }
+                }
+            })
+        });
+        $('.add').click(function(){
+            $('.tet-t').css({'display':'block'})
+        })
+        // $('.set').click(function(){
+        //     var uset = $(this).siblings('.usname').html();
+        //     $('form').css({'display':'block'});
+        //     $.ajax({
+        //         url: '/adust',
+        //         type: 'POST',
+        //         dataType: 'JSON',
+        //         data: {uset: uset},
+        //         success:function(data){
+
+        //         }
+        //     })
+        // });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><img src="images/logo.jpg" /></div>
+        <div class="menu">
+            <ul>
+                <% include public/top.ejs %>
+            </ul>
+        </div>
+    </div>
+    <div class="banner"><img src="images/sec_banner.jpg" /></div>
+    <div class="news_con">
+        <div class="new_menu">
+            <ul>
+                <li><a href="/article">企业新闻</a></li>
+                <li><a href="/brticle">行业动态</a></li>
+                <li><a href="/crticle">企业理念</a></li>
+                <li class="first"><a href="/drticle">网站留言</a></li>
+            </ul>
+        </div>
+        <div class="new">
+            <img src="images/message.jpg " />
+            <div class="tet-t">
+                <from>
+                    <br />姓 &nbsp;名：&nbsp;<input type="text" class="username" /><br />
+                    <br />性别：&nbsp;<input type="radio" name="sex" value="男" />男 &nbsp;<input type="radio" name="sex" value="女"/>女<br />
+                    <br />兴趣：&nbsp;<input type="checkbox" value="游戏" />游戏 &nbsp;<input type="checkbox" value="运动" />运动 &nbsp;<input type="checkbox" value="美食" />美食 &nbsp;<input type="checkbox" value="睡觉" />睡觉 <br />
+                    <br />联系方式：&nbsp;<input type="text" class="tel" /><br />
+                    <br />QQ：&nbsp;<input type="text" class="qq" /><br />
+                    <br/>来自：&nbsp;<select class="city"><option>武汉</option> <option>广州</option> <option>深圳</option> <option>上海</option> <option>北京</option></select><br />
+                    <br />E-mail：&nbsp;<input type="text" class="eml" /><br />
+                    <br /><input type="submit" class="subtn" /> &nbsp;&nbsp;&nbsp;&nbsp;<input type ="reset" class="reset" />
+                </from>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        2011-2013 &nbsp;&nbsp;@正航科技股份有限公司&nbsp;&nbsp;版权所有<br />地址 ： 上海乐清市柳市镇柳市大厦&nbsp;&nbsp;邮编： 2000000 电话： 021-12345678 传真：021-12345678 E-mail: admin@zhenghang.com
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $('.username').blur(function(){
+            let pattern = /^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/;
+            let str = $('.username').val();
+            // console.log(pattern.test(str));
+            if(pattern.test(str)){
+
+            }else{
+                $('.username').val('');
+                alert('请输入正确的姓名！')
+            }
+        });
+        $('.tel').blur(function(){
+            let pattern = /(13\d|14[579]|15[^4\D]|17[^49\D]|18\d)\d{8}/g;
+            let str = $('.tel').val();
+            if(pattern.test(str)){
+
+            }else{
+                $('.tel').val('');
+                alert('请输入正确的手机号！');
+            }
+        })
+        $('.qq').blur(function(){
+            let pattern = /[1-9]\d{4,}/g;
+            let str = $('.qq').val();
+            if(pattern.test(str)){
+
+            }else{
+                $('.qq').val();
+                alert('请输入正确的QQ号！');
+            }
+        });
+        $('.eml').blur(function(){
+            let pattern = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/g ;
+            let str =  $('.eml').val();
+            if(pattern.test(str)){
+
+            }else{
+                $('.eml').val('');
+                alert('请输入正确的邮箱！');
+            }
+        });
+        $('.reset').click(function(){
+            $('.username').val('');
+            $('.tel').val('');
+            $('.qq').val('');
+            $('.eml').val('');
+            $('input:checkbox').each(function () {
+                    $(this).attr('checked',false);
+            });
+            $('input:radio').each(function () {
+                    $(this).attr('checked',false);
+            });
+        })
+        $('.subtn').click(function(){
+            var check = '';
+            $('input:checkbox:checked').each(function(){
+                check += $(this).val()+'  ';
+            });
+            // console.log(check);
+            $.ajax({
+                url: '/user',
+                type: 'POST',
+                dataType: 'JSON',
+                data:{act:'reg',username:$('.username').val(),sex:$('input:radio:checked').val(),likes:check,tel:$('.tel').val(),qq:$('.qq').val(),city:$('.city').val(),eml:$('.eml').val()},
+                success:function(data){
+                    if(data.ok == true){
+                        alert('提交成功')
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper-4.1.0.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+    <style type="text/css">
+        .imgs{
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><img src="images/logo.jpg" /></div>
+        <div class="menu">
+            <% include public/top.ejs %>
+        </div>
+    </div>
+    <div class="content" style='height:auto'>
+        <div class="con_menu" style='height:auto'>
+                <img src="images/about_us.jpg" />
+                <%- indexCon.index_con%>
+        </div>
+        <div class="con_img">
+            <!-- <a href="##">
+                <img src="images/beauty.jpg" width="325px" height="464px" />
+            </a> -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <% for(var i=0;i<banner.length;i++){ %>
+                      <div class="swiper-slide"><img class="imgs" src=<%= banner[i].src %>/></div>
+                    <% } %>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+    <% include public/foot.ejs %>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/swiper-4.1.0.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          autoplay:true,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+    </script>
+</body>
+</html>
